@@ -6,6 +6,11 @@
 
     $select_sql = "SELECT email from users where email = '" . $_POST['email'] . "';";
 
-    print '<p>' . $select_sql . '</p>';
-    print '<p>' . $insert_sql . '</p>';
+
+    $conn = new PDO("mysql:host=localhost;dbname=GQS", 'root', '');
+    $stmt = $conn->prepare($insert_sql);
+    $stmt->execute();
+
+    print $conn->lastInsertId(); 
+
 ?>
