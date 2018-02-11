@@ -3,14 +3,13 @@
         <a href="#" class="header item">GQS</a>
 <?php
 
-    $menusql = "SELECT short_title FROM static ORDER BY id ASC;";
-    $conn = new PDO("mysql:host=localhost;dbname=GQS", 'root', '');
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $menusql = "SELECT short_title FROM static WHERE privilege = 1 ORDER BY id ASC;";
+    include '../db.php';
     $stmt = $conn->prepare($menusql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     foreach($result AS $row) {
-        echo '<a href="index.php?pageid=' . $row['short_title'] . '" class="item">' . $row['short_title'] . '</a>';
+        echo '<a onClick="doMenu(\'' . $row['short_title'] . '\')" class="item cursoron">' . $row['short_title'] . '</a>';
     }
 
 ?>

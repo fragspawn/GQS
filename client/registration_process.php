@@ -4,8 +4,7 @@
                     ( '" . $_POST['fname'] . "',  '" . $_POST['lname'] . "',  '" . 
                     $_POST['email'] . "',  '" .$_POST['phone'] . "');";
 
-    $conn = new PDO("mysql:host=localhost;dbname=GQS", 'root', '');
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    include '../db.php';
     
     $stmt = $conn->prepare($insert_sql);
     $stmt->execute();

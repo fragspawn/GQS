@@ -1,0 +1,9 @@
+.cursoron {
+    cursor: grab;
+}
+#contentgroup {
+    display: block;
+}
+.contentitem {
+    display: none;
+}
