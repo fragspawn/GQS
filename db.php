@@ -1,5 +1,7 @@
 <?php
-    $conn = new PDO("mysql:host=localhost;dbname=GQS", 'root', '');
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    function dbConnect() {
+        $conn = new PDO("mysql:host=localhost;dbname=GQS", 'root', '');
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conn;
+    }
 ?>
-

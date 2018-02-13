@@ -1,16 +1,6 @@
 <?php
-//  Session Management
-
-    if(isset($_GET['pageid'])) {
-        $pageid = $_GET['pageid'];
-    } else {
-        $pageid = 'home';
-    }
-    $contentquery = "SELECT * FROM static";
     include '../db.php';
-    $stmt = $conn->prepare($contentquery);
-    $stmt->execute();
-    $staticresult = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    include '../session.php';
 
 //  Render HTML
     include "header.php";
@@ -20,8 +10,14 @@
     // Body Content
     include "menu.php";
 ?>
-<div id="contentgroup">
 <?php
+    $contentquery = "SELECT * FROM static WHERE privilege = " . $_SESSION['usertype'] . " OR privilege = -1";
+    $conn = dbConnect();
+    $stmt = $conn->prepare($contentquery);
+    $stmt->execute();
+    $staticresult = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    echo '<div id="contentgroup">';
     foreach($staticresult as $row) {
         echo '<div class="contentitem" id="' . $row['short_title'] . '">';
             echo '<h1>' . $row['title'] . '</h1>';
@@ -29,13 +25,7 @@
             echo '<div>' . $row['body'] . '</div>';
         echo '</div>';
     }
-?>
-</div>
-<?php
-    include "rego.php";
-?>
-<?php
-    include "login.php";
+    echo '</div>';
 ?>
 <?php
     // End Body Content

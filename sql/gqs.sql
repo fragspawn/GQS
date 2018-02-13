@@ -1,108 +1,154 @@
--- phpMyAdmin SQL Dump
--- version 4.3.11
--- http://www.phpmyadmin.net
+-- MySQL dump 10.16  Distrib 10.2.10-MariaDB, for Linux (x86_64)
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 05, 2018 at 11:52 PM
--- Server version: 5.6.24
--- PHP Version: 5.6.8
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
+-- Host: localhost    Database: GQS
+-- ------------------------------------------------------
+-- Server version	10.2.10-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Database: `gqs`
+-- Table structure for table `line_item`
 --
 
--- --------------------------------------------------------
+DROP TABLE IF EXISTS `line_item`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `line_item` (
+  `line_item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) NOT NULL,
+  `system_name` varchar(128) NOT NULL,
+  `description` varchar(1024) NOT NULL,
+  `image_small` varchar(128) NOT NULL,
+  `image_medium` varchar(128) NOT NULL,
+  `image_large` varchar(128) NOT NULL,
+  `units` varchar(32) NOT NULL,
+  `unit_increment` int(11) NOT NULL,
+  `unit_cost` decimal(8,0) NOT NULL,
+  `units_small` int(11) NOT NULL,
+  `units_medium` int(11) NOT NULL,
+  `units_large` int(11) NOT NULL,
+  `units_min` int(11) NOT NULL,
+  `units_max` int(11) NOT NULL,
+  `enabled` int(11) NOT NULL,
+  PRIMARY KEY (`line_item_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `line_item`
+--
+
+LOCK TABLES `line_item` WRITE;
+/*!40000 ALTER TABLE `line_item` DISABLE KEYS */;
+INSERT INTO `line_item` VALUES (1,'Storage Space','storage_space','The amount of non volatile storage the system will incorporate 1 TB = 1,000 Gigabytes','http://placehold.it/150x150','http://placehold.it/200x200','http://placehold.it/300x300','TB',1,59,3,6,12,1,30,1),(2,'Memory','memory','System Memory the amount of volatile storage the system will have','http://placehold.it/150x150','http://placehold.it/200x200','http://placehold.it/300x300','GB',4,20,4,8,16,4,64,1),(3,'Network Interfaces','network_interfaces','The number of network connections the system needs','http://placehold.it/150x150','http://placehold.it/200x200','http://placehold.it/300x300','Gigabit Port',1,100,1,2,3,1,4,1),(4,'Network Nodes','network_nodes','The number of clients to be served by the system','http://placehold.it/150x150','http://placehold.it/200x200','http://placehold.it/300x300','clients',4,10,16,48,128,4,512,1),(5,'CPU cores','cpu_cores','The number of CPU cores to put to the task','http://placehold.it/150x150','http://placehold.it/200x200','http://placehold.it/300x300','cores',2,100,2,4,8,2,16,1),(6,'thin clients','thin_clients','The number of diskless multi-media devices that will be connected to the system','http://placehold.it/150x150','http://placehold.it/200x200','http://placehold.it/300x300','thin clients',4,300,4,16,32,0,128,1),(7,'DVB Channels','dvb_channels','The number of digital video broadcast tuners to install into the server','http://placehold.it/150x150','http://placehold.it/200x200','http://placehold.it/300x300','DVB Tuner',1,80,1,2,4,0,8,1),(8,'Antenna Install','antenna_install','Professional installation of DVB compatible antenna','http://placehold.it/150x150','http://placehold.it/200x200','http://placehold.it/300x300','Antenna',1,1000,1,2,3,0,4,1),(9,'Gigabit Switching','gigabit_switching','The switching equipment needed to serve video clients','http://placehold.it/150x150','http://placehold.it/200x200','http://placehold.it/300x300','gigabit port',8,90,8,16,64,0,512,1),(10,'Network cabling','network_cabling','Run CAT5e cable for 16 computers, per room','http://placehold.it/150x150','http://placehold.it/200x200','http://placehold.it/300x300','rooms',1,3000,1,4,8,0,32,1);
+/*!40000 ALTER TABLE `line_item` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `logs`
+--
+
+DROP TABLE IF EXISTS `logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `logs` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `session_ID` varchar(256) NOT NULL,
+  `URL` varchar(512) NOT NULL,
+  `IP` varchar(16) NOT NULL,
+  `datestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=190 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `logs`
+--
+
+LOCK TABLES `logs` WRITE;
+/*!40000 ALTER TABLE `logs` DISABLE KEYS */;
+INSERT INTO `logs` VALUES (1,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:13:27'),(2,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:16:09'),(3,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:19:42'),(4,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:19:49'),(5,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:20:56'),(6,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:27:47'),(7,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:28:25'),(8,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:28:52'),(9,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:30:05'),(10,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:30:58'),(11,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:31:06'),(12,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:32:32'),(13,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:32:46'),(14,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:33:26'),(15,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:34:40'),(16,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:37:48'),(17,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:38:14'),(18,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:38:56'),(19,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:41:12'),(20,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:41:21'),(21,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:42:01'),(22,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:42:17'),(23,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:42:21'),(24,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:42:34'),(25,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:42:39'),(26,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:43:13'),(27,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:43:20'),(28,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 05:44:02'),(29,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:44:02'),(30,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:45:28'),(31,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:46:16'),(32,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:48:25'),(33,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:48:58'),(34,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:51:23'),(35,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:52:10'),(36,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:54:24'),(37,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:55:27'),(38,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 05:57:56'),(39,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:57:56'),(40,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:58:37'),(41,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 05:59:50'),(42,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:00:13'),(43,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:00:47'),(44,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:01:41'),(45,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:01:42'),(46,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:02:00'),(47,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:02:45'),(48,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:12:13'),(49,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:12:55'),(50,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:13:18'),(51,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:13:22'),(52,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:13:57'),(53,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:28:15'),(54,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:29:33'),(55,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:29:39'),(56,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:30:17'),(57,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:30:33'),(58,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:35:06'),(59,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:35:10'),(60,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:35:37'),(61,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:36:51'),(62,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:36:54'),(63,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:38:05'),(64,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:39:03'),(65,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:39:18'),(66,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:40:06'),(67,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:43:02'),(68,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:43:08'),(69,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:43:27'),(70,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:43:37'),(71,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:43:38'),(72,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:44:04'),(73,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:44:17'),(74,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:44:22'),(75,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:46:26'),(76,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:46:42'),(77,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:47:05'),(78,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:48:23'),(79,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:52:25'),(80,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 06:52:30'),(81,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:04:46'),(82,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:05:02'),(83,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:06:43'),(84,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:07:06'),(85,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:07:10'),(86,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:07:51'),(87,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:08:14'),(88,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:10:43'),(89,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 07:12:04'),(90,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:12:04'),(91,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:17:53'),(92,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:18:26'),(93,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:19:09'),(94,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:28:09'),(95,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 07:29:05'),(96,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:29:05'),(97,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:29:10'),(98,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:29:34'),(99,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:29:37'),(100,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:29:44'),(101,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 07:32:17'),(102,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:32:17'),(103,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 07:35:15'),(104,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:35:15'),(105,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:35:22'),(106,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:39:25'),(107,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:39:44'),(108,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:40:39'),(109,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:41:45'),(110,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:41:48'),(111,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:42:18'),(112,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:44:16'),(113,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:44:48'),(114,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:47:27'),(115,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:47:29'),(116,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:47:50'),(117,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:51:11'),(118,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:52:59'),(119,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:53:54'),(120,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:55:37'),(121,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:56:30'),(122,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:57:42'),(123,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:57:54'),(124,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 07:58:30'),(125,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:58:30'),(126,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:58:42'),(127,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 07:59:31'),(128,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:59:31'),(129,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 07:59:43'),(130,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 08:03:37'),(131,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 08:03:39'),(132,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 08:13:22'),(133,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 08:15:37'),(134,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 08:18:56'),(135,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 08:27:58'),(136,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 08:29:47'),(137,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 08:31:06'),(138,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 08:34:22'),(139,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:28:42'),(140,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:30:19'),(141,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:30:45'),(142,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:31:18'),(143,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:31:55'),(144,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:33:04'),(145,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:33:49'),(146,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:35:10'),(147,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:36:07'),(148,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:37:18'),(149,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:37:20'),(150,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:41:37'),(151,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 10:48:24'),(152,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:48:24'),(153,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:48:32'),(154,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 10:48:41'),(155,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:48:41'),(156,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 10:49:16'),(157,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:49:16'),(158,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 10:49:31'),(159,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:49:31'),(160,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 10:49:42'),(161,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:49:42'),(162,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 10:49:54'),(163,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:49:54'),(164,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 10:50:33'),(165,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:50:33'),(166,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:50:43'),(167,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:50:45'),(168,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 10:50:54'),(169,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:50:54'),(170,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:51:03'),(171,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 10:52:20'),(172,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:52:40'),(173,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:52:42'),(174,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 10:52:49'),(175,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:52:49'),(176,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 10:52:58'),(177,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 10:54:08'),(178,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/','localhost','2018-02-13 23:02:39'),(179,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 23:02:52'),(180,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 23:02:52'),(181,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 23:03:03'),(182,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 23:03:03'),(183,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 23:03:12'),(184,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 23:03:12'),(185,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/login_process.php','localhost','2018-02-13 23:03:21'),(186,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 23:03:21'),(187,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 23:03:55'),(188,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 23:05:58'),(189,'vm2t74rqgchj37gepel75evgdp','/~jp/GQS/client/index.php','localhost','2018-02-13 23:07:10');
+/*!40000 ALTER TABLE `logs` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `static`
 --
 
-CREATE TABLE IF NOT EXISTS `static` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `static`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `static` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `short_title` varchar(24) NOT NULL,
   `privilege` int(1) NOT NULL,
   `title` varchar(240) NOT NULL,
   `byline` varchar(512) NOT NULL,
   `body` text NOT NULL,
-  `image` varchar(256) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  `image` varchar(256) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `short_title` (`short_title`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `static`
 --
 
-INSERT INTO `static` (`id`, `short_title`, `privilege`, `title`, `byline`, `body`, `image`) VALUES
-(1, 'home', 1, 'Home Page', 'Welcome to the Generic Quotation System. ', '<p>You can create custom products that have unique configurations</p>\r\n<p>Customers can get a price for their perfect product, based on choices they make</p>', 'home.png'),
-(2, 'about', 1, 'About Us', 'We are software developers making generic solutions to generic problems', '<p>We charge a lot of money to do very little</p>\r\n<p>Try this generic Quotation System Now to see what we can do for you</p>', 'about.png'),
-(3, 'philosophy', 1, 'Philosophy', 'Our goals and Ideals', '<p>We have None</p>', 'philosophy.png'),
-(5, 'contact', 1, 'Contact Us', 'We''re not very available, there is no certainty that we''ll get back to you', '<p>11 Foobar Ct</p>\r\n<p>NOWHEREVILLE</p>\r\n<p>Qld 4999</p>\r\n<p>Australia</p>', 'contact.png'),
-(6, 'login', 1, 'Login Page', 'Enter the system by using a pre-made user/pass combination', '<p>Form goes here</p>', 'login.png'),
-(7, 'logout', 2, 'Logout Page', 'Exit Privilege State', '<p>No content required here</p>', 'logout.png');
-
--- --------------------------------------------------------
+LOCK TABLES `static` WRITE;
+/*!40000 ALTER TABLE `static` DISABLE KEYS */;
+INSERT INTO `static` VALUES (1,'home',-1,'Home Page','Welcome to the Generic Quotation System. ','<p>You can create custom products that have unique configurations</p>\n<p>Customers can get a price for their perfect product, based on choices they make</p>','home.png'),(2,'about',0,'About Us','We are software developers making generic solutions to generic problems','<p>We charge a lot of money to do very little</p>\r\n<p>Try this generic Quotation System Now to see what we can do for you</p>','about.png'),(3,'philosophy',0,'Philosophy','Our goals and Ideals','<p>We have None</p>','philosophy.png'),(5,'contact',0,'Contact Us','We\'re not very available, there is no certainty that we\'ll get back to you','<p>11 Foobar Ct</p>\r\n<p>NOWHEREVILLE</p>\r\n<p>Qld 4999</p>\r\n<p>Australia</p>','contact.png'),(6,'register',0,'User Registration','Register Now to Confirm your interest in our product(s)','<div class=\"ui modal\" id=\"registermodal\">\r\n  <i class=\"close icon\"></i>\r\n  <div class=\"header\">\r\n    Login Form\r\n  </div>\r\n    <div class=\"description\">\r\n        <fieldset>\r\n            <legend>Registration Form</legend>\r\n            <div class=\"ui form large\" id=\"rego_form\">\r\n                <form method=\"post\" action=\"registration_process.php\">\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <input type=\"text\" name=\"fname\" id=\"cust_fname\" placeholder=\"First Name\">\r\n                        <i class=\"user icon\"></i>\r\n                    </div>\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <input type=\"text\" name=\"lname\" id=\"cust_lname\" placeholder=\"Last Name\">\r\n                        <i class=\"user icon\"></i>\r\n                    </div>\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <input type=\"text\" name=\"email\" id=\"cust_email\" placeholder=\"E-Mail Address\">\r\n                        <i class=\"mail icon\"></i>\r\n                    </div>\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <input type=\"text\" name=\"phone\" id=\"cust_phone\" placeholder=\"Phone Number\">\r\n                        <i class=\"phone icon\"></i>\r\n                    </div>\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <input type=\"password\" name=\"password\" id=\"cust_pass\" placeholder=\"Password\">\r\n                        <i class=\"lock icon\"></i>\r\n                    </div>\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <input type=\"password\" name=\"password2\" id=\"cust_pass2\" placeholder=\"Password Again\">\r\n                        <i class=\"lock icon\"></i>\r\n                    </div>\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <input type=\"text\" name=\"dob\" id=\"cust_dob\" placeholder=\"Date of Birth\">\r\n                        <i class=\"calendar icon\"></i>\r\n                    </div>\r\n                    <div class=\"ui checkbox\">\r\n                        <input type=\"checkbox\" name=\"terms\" tabindex=\"0\">\r\n                        <label>I agree to the terms and conditions</label>\r\n                    </div>\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <button type=\"button\" class=\"ui red fluid cancel button\">\r\n                            Cancel\r\n                            <i class=\"inverted remove icon right\"></i>\r\n                        </button>\r\n                        <button type=\"submit\" id=\"cust_reg_submt\" class=\"ui fluid blue submit button\">Register\r\n                            <i class=\"inverted checkmark icon right\"></i>\r\n                        </button>\r\n                    </div>\r\n                    <div id=\"emailvalidity\" class=\"ui error message\"></div>\r\n                </form>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n</div>\r\n',''),(7,'login',0,'Login Page','Enter the system by using a pre-made user/pass combination','<div class=\"ui modal\" id=\"loginmodal\">\r\n  <i class=\"close icon\"></i>\r\n  <div class=\"header\">\r\n    Login Form\r\n  </div>\r\n    <div class=\"description\">\r\n        <fieldset>\r\n            <legend>Login Form</legend>\r\n            <div class=\"ui form large\" id=\"login_form\">\r\n                <form action=\"login_process.php\" method=\"POST\">\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <input type=\"text\" name=\"email\" id=\"cust_login_email\" placeholder=\"E-Mail Address\">\r\n                        <i class=\"user icon\"></i>\r\n                    </div>\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <input type=\"password\" name=\"password\" id=\"cust_login_password\" placeholder=\"Password\">\r\n                        <i class=\"lock icon\"></i>\r\n                    </div>\r\n                    <div class=\"ui field fluid icon input\">\r\n                        <button type=\"button\" class=\"ui red fluid deiny button\">\r\n                            Cancel\r\n                            <i class=\"inverted remove icon right\"></i>\r\n                        </button>\r\n                        <button type=\"submit\" id=\"cust_login_submt\" class=\"ui submit positive button blue fluid\">\r\n                            Login\r\n                            <i class=\"inverted checkmark icon right\"></i>\r\n                        </button>\r\n                    </div>\r\n                    <div id=\"loginvalidity\" class=\"ui error message\"></div>\r\n                </form>\r\n            </div>\r\n        </fieldset>\r\n    </div>\r\n</div>\r\n','login.png'),(8,'quotes',1,'Previous Quotes','Show quotes that have been previously generated','<p>foo</p>','quotes.png'),(9,'logout',1,'Logout Page','Exit Privilege State','<div class=\"ui basic modal\"  id=\"logoutmodal\">\r\n  <div class=\"ui icon header\">\r\n    <i class=\"user icon\"></i>\r\n    Exit Account\r\n  </div>\r\n  <div class=\"content\">\r\n    <p>Log out of this account? Previous Quotes will not longer be available.</p>\r\n  </div>\r\n  <div class=\"actions\">\r\n    <div class=\"ui red basic cancel inverted button\">\r\n      <i class=\"user icon\"></i>\r\n      No\r\n    </div>\r\n<a href=\"./logout.php\">\r\n    <div class=\"ui blue ok inverted button\">\r\n      <i class=\"checkmark icon\"></i>\r\n      Yes\r\n    </div>\r\n</a>\r\n  </div>\r\n</div>','logout.png');
+/*!40000 ALTER TABLE `static` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `ID` int(11) NOT NULL,
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
   `fname` varchar(64) NOT NULL,
   `lname` varchar(64) NOT NULL,
   `email` varchar(128) NOT NULL,
   `phone` varchar(32) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `isadmin` varchar(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  `dob` date NOT NULL,
+  `usertype` int(11) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID` (`ID`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`ID`, `fname`, `lname`, `email`, `phone`, `password`, `isadmin`) VALUES
-(1, 'asdf', 'asdf', 'asdf', 'asdf', '', ''),
-(2, 'qwer', 'qwer', 'qwer', 'qwer', '', ''),
-(3, 'zxcv', 'zxcv', 'zxcv', 'xzcv', '', '');
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (5,'John','Perry','john@john.com','04004040044','asdfasdf','2006-04-11',1),(6,'John','Perry','john@perry.com','04082818202','asdfasdf','1970-01-01',1),(8,'John','Perry','john@perry2.com','008838302022','asdfasdf','1982-03-03',1),(9,'John','Perry','john@perry3.com','008838302022','asdfasdf','1982-03-03',1),(11,'Steve','Simon','john@perry4.com','123412341234','asdfasdf','1972-11-11',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `static`
---
-ALTER TABLE `static`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `short_title` (`short_title`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`ID`), ADD UNIQUE KEY `ID` (`ID`), ADD UNIQUE KEY `email` (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `static`
---
-ALTER TABLE `static`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2018-02-14  9:12:24

@@ -1,7 +1,9 @@
 <?php
+    header('Content-Type: application/json');
+    include '../db.php';
     $select_sql = "SELECT email from users where email = '" . $_GET['email'] . "';";
 
-    include '../db.php';
+    $conn = dbConnect();
 
     $stmt = $conn->prepare($select_sql);
     $stmt->execute();
@@ -9,8 +11,8 @@
     $result = $stmt->fetchAll();
 
     if(count($result) > 0) {
-        echo "red text";
+        echo json_encode(Array('emailexists'=>true)); 
     } else {
-        echo "green tick";
+        echo json_encode(Array('emailexists'=>false)); 
     }
 ?>

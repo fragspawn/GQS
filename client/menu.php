@@ -1,18 +1,21 @@
-<nav class="ui text container">
-    <div class="ui borderless inverted main menu">
+    <div class="ui fluid borderless inverted pointing main menu">
         <a href="#" class="header item">GQS</a>
 <?php
+    $menusql = "SELECT short_title FROM static WHERE privilege = " . $_SESSION['usertype'] . " OR privilege = -1 ORDER BY id ASC;";
 
-    $menusql = "SELECT short_title FROM static WHERE privilege = 1 ORDER BY id ASC;";
-    include '../db.php';
+    $conn = dbConnect(); 
     $stmt = $conn->prepare($menusql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach($result AS $row) {
-        echo '<a onClick="doMenu(\'' . $row['short_title'] . '\')" class="item cursoron">' . $row['short_title'] . '</a>';
+    for($loop = 0; $loop < count($result); $loop++) {
+        // Right justify the last item in the menu
+        if($loop == count($result) - 1) {
+            echo '<div class="right menu"><a onClick="doMenu(\'' . $result[$loop]['short_title'] . '\')" class="item cursoron">' . $result[$loop]['short_title'] . '</a></div>';
+        } else {
+            echo '<a onClick="doMenu(\'' . $result[$loop]['short_title'] . '\')" class="item cursoron">' . $result[$loop]['short_title'] . '</a>';
+        }
     }
 
 ?>
     </div>
-</nav>
 <section>

@@ -6,9 +6,7 @@ A client-facing system that allows for complex products to specified by a purspe
 /admin - Administration panel
 /client - Public-facing Interface
 
-
-
-5/2/18 - TODO
-Single Page website setup
-
-
+BUILD client-side
+5/2/18 - Single Page website setup
+12/2/18 - Build Authentication 
+19/2/18 - Render Quotelines from database, and make a custom interface 
