@@ -5,9 +5,22 @@ window.onload = function() {
     // onload Default to homepage
     document.getElementById('contentgroup').firstElementChild.style.display = 'block';
 
-    // Hide all modals, by default
+    // Global Modal Configuration 
     $('.modal').modal({
 		closable: true
+    });
+
+    // Global Accordian Configuration 
+    $('.ui.accordion').accordion();
+
+    // Datepicker 
+    $('#cust_dob').datepicker({
+        dateFormat: "yy-mm-dd",
+        changeMonth: true,
+        minDate: "-100Y", 
+        maxDate: "+0D",
+        yearRange: "-100:+0",
+        changeYear: true
     });
 
     // Form Validation for Login Form 
@@ -40,6 +53,7 @@ window.onload = function() {
     });
 
     // Custom Validation for the Check if Email exists  
+    // Documentaion describes synchronous nature of this but .ajax is asynchronous! - Fix not yet obvious 
     $.fn.form.settings.rules.hasEmail = function(value, donno) {
         checkEmailExists(); 
         if(window.sessionStorage.getItem('emailexists') == 'true') {
@@ -166,6 +180,8 @@ function checkEmailExists() {
 function doMenu(menuItem) {
     hideAll();
     document.getElementById(menuItem).style.display = 'block';
+
+    // If there is a modal to show, then show it now
     modalID = menuItem + 'modal';
     if(document.getElementById(modalID) != null) {
         $('#' + modalID).modal('show');

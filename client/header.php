@@ -10,9 +10,13 @@
           src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
           integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
           crossorigin="anonymous"></script> 
+        <link rel="stylesheet" href="../css/jquery-ui.min.css"/>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script> 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
+
+        <script src="../js/sementic_ui_range.js" defer></script>
+        <link rel="stylesheet" href="../css/sementic_ui_range.css"/>
         
 <!-- Customisations -->
         <script src="../js/formValidation.js" defer></script>
